@@ -1,21 +1,20 @@
 class ParraCli < Formula
   desc "A utility for getting started with your next Parra.io project."
   homepage "https://parra.io"
-  url "https://github.com/Parra-Inc/parra-cli"
   license "MIT"
   name 'parra-cli'
-  depends_on macos: '>= :sonoma' # Based on min Xcode 15.3
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.7/parra-cli-0.1.7.x86_64_apple_darwin.tar.gz"
-      sha256 "8ca20762c198d373a0fd992e448f820cdfe701b2"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.9/parra-cli-0.1.9.x86_64_apple_darwin.tar.gz"
+      sha256 "0332f3590f7c06fad65412e403c8df1733fb99435fe692e514bd3d84f08eafa0"
     elsif Hardware::CPU.arm?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.7/parra-cli-0.1.7.aarch64_apple_darwin.tar.gz"
-      sha256 "a29363d369a06536cc4fd0bccc33d24856e6b279"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.9/parra-cli-0.1.9.aarch64_apple_darwin.tar.gz"
+      sha256 "b610179113d2802c58f529f9956bf255f044149a961f07928da78f810d2b218e"
     end
   end
 
+  # depends_on macos: '>= :sonoma' # Based on min Xcode 15.3
   depends_on "xcodes"
   depends_on "aria2"
   depends_on "xcodegen"
