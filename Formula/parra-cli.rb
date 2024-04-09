@@ -8,11 +8,11 @@ class ParraCli < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/0.1.0/parra-cli-0.1.0.x86_64_apple_darwin.tar.gz"
-      sha256 "3b7655528950d5f94073ad672df54ec8e4bbc968"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.7/parra-cli-0.1.7.x86_64_apple_darwin.tar.gz"
+      sha256 "8ca20762c198d373a0fd992e448f820cdfe701b2"
     elsif Hardware::CPU.arm?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/0.1.0/parra-cli-0.1.0.aarch64_apple_darwin.tar.gz"
-      sha256 "8dd62923cb2c7f16c4c4a6448e1c01fe7771b9fd"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.7/parra-cli-0.1.7.aarch64_apple_darwin.tar.gz"
+      sha256 "a29363d369a06536cc4fd0bccc33d24856e6b279"
     end
   end
 
