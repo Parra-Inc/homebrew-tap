@@ -2,27 +2,28 @@ class ParraCli < Formula
   desc "A utility for getting started with your next Parra.io project."
   homepage "https://parra.io"
   license "MIT"
-  name 'parra-cli'
+  url "https://github.com/Parra-Inc/parra-cli.git", tag: "0.1.10"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.9/parra-cli-0.1.9.x86_64_apple_darwin.tar.gz"
-      sha256 "0332f3590f7c06fad65412e403c8df1733fb99435fe692e514bd3d84f08eafa0"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.10/parra-cli-0.1.10.x86_64_apple_darwin.tar.gz"
+      sha256 "b84218bcdca6576f751838e3fe6f10f96f51b696ac369a9a02ca3a84eb72948b"
     elsif Hardware::CPU.arm?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.9/parra-cli-0.1.9.aarch64_apple_darwin.tar.gz"
-      sha256 "b610179113d2802c58f529f9956bf255f044149a961f07928da78f810d2b218e"
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.10/parra-cli-0.1.10.aarch64_apple_darwin.tar.gz"
+      sha256 "d587d83ad8fba6244cece3201f8e18c084002d76dada921a871403ba4d3ad1b1"
     end
   end
 
-  # depends_on macos: '>= :sonoma' # Based on min Xcode 15.3
   depends_on "xcodes"
   depends_on "aria2"
   depends_on "xcodegen"
 
   def install
-    # Remove unrecognized options if they cause configure to fail
-    # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    # system "./configure", "--disable-silent-rules", *std_configure_args
-    # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    # Not including the `target/` base dir. Brew auto opens the top level directory.
+    if Hardware::CPU.intel?
+      bin.install "x86_64-apple-darwin/release/parra"
+    elsif Hardware::CPU.arm?
+      bin.install "aarch64-apple-darwin/release/parra"
+    end    
   end
 end
