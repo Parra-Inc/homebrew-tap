@@ -1,16 +1,20 @@
+$VERSION = "0.1.11"
+$ARM_SHA = "88900d16e410be8c0922b60de41862165bd19b4ca0143076a306bda9a42a0b4e"
+$X86_SHA = "1b5f4ddce8aee2f73b38515904957fae1ef7022fdabf569e414e4fc94f0d7e37"
+
 class ParraCli < Formula
   desc "A utility for getting started with your next Parra.io project."
   homepage "https://parra.io"
   license "MIT"
-  url "https://github.com/Parra-Inc/parra-cli.git", tag: "0.1.10"
+  url "https://github.com/Parra-Inc/parra-cli.git", tag: VERSION
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.10/parra-cli-0.1.10.x86_64_apple_darwin.tar.gz"
-      sha256 "b84218bcdca6576f751838e3fe6f10f96f51b696ac369a9a02ca3a84eb72948b"
-    elsif Hardware::CPU.arm?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v0.1.10/parra-cli-0.1.10.aarch64_apple_darwin.tar.gz"
-      sha256 "d587d83ad8fba6244cece3201f8e18c084002d76dada921a871403ba4d3ad1b1"
+    if Hardware::CPU.arm?
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v#{VERSION}/parra-cli-#{VERSION}.aarch64_apple_darwin.tar.gz"
+      sha256 ARM_SHA
+    elsif Hardware::CPU.intel?
+      url "https://github.com/Parra-Inc/parra-cli/releases/download/v#{VERSION}/parra-cli-#{VERSION}.x86_64_apple_darwin.tar.gz"
+      sha256 X86_SHA
     end
   end
 
