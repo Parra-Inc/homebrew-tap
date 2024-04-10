@@ -1,6 +1,6 @@
-VERSION = "0.1.11"
-ARM_SHA = "88900d16e410be8c0922b60de41862165bd19b4ca0143076a306bda9a42a0b4e"
-X86_SHA = "1b5f4ddce8aee2f73b38515904957fae1ef7022fdabf569e414e4fc94f0d7e37"
+VERSION = "0.1.12"
+ARM_SHA = "f1efc8f7f473890abcf41b9f71a652831195eece164211221ba874d4cd452614"
+X86_SHA = "12b59dc8109e347d174418f005243ee4b7ab14106b56462d266ebd8545442d56"
 
 class ParraCli < Formula
   desc "A utility for getting started with your next Parra.io project."
@@ -18,8 +18,6 @@ class ParraCli < Formula
     end
   end
 
-  depends_on "xcodes"
-  depends_on "aria2"
   depends_on "xcodegen"
 
   def install
