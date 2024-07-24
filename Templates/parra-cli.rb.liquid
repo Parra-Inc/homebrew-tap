@@ -1,7 +1,7 @@
-VERSION = "{{ release.version }}"
-ARM_SHA = "{{ release.checksum.arm }}"
-X86_SHA = "{{ release.checksum.x86 }}"
-DESCRIPTION = "{{ release.description, 'default: A utility for getting started with your next Parra.io project.' }}"
+VERSION = "{{ version }}"
+ARM_SHA = "{{ arm_sha }}"
+X86_SHA = "{{ x86_sha }}"
+DESCRIPTION = "{{ description | default: 'A utility for getting started with your next Parra.io project.' }}"
 
 class ParraCli < Formula
   desc DESCRIPTION
@@ -30,3 +30,4 @@ class ParraCli < Formula
     end    
   end
 end
+
