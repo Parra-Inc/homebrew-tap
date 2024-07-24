@@ -1,10 +1,11 @@
-# Parra-Inc Parra-cli
+# Parra Homebrew Taps
 
-## How do I install these formulae?
+This repository hosts the taps for Parra's Homebrew formulae. Currently this is limited to Parra's CLI.
 
-`brew install parra-inc/parra-cli/<formula>`
+## CLI Installation
 
-Or `brew tap parra-inc/parra-cli` and then `brew install <formula>`.
+`brew install parra-inc/taps/parra-cli`
+Or `brew tap parra-inc/tap` and then `brew install parra-cli`.
 
 ## Documentation
 
