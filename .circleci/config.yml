@@ -11,12 +11,20 @@ jobs:
 
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
+            - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
+
       - jq/install
+
       - node/install:
           node-version: '21.4'
+
       - run:
           name: Install Liquid
           command: npm install liquidjs -g
+
       - run:
           name: Transform Formula Template
           command: |
@@ -35,7 +43,7 @@ jobs:
             git add --all
             git commit -m "Parra CLI version $WEBHOOK_VERSION"
 
-            git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
+            git push -q git@github.com:Parra-Inc/tap.git main
 
 workflows:
   update-cli-formula-workflow:
