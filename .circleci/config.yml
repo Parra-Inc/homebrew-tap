@@ -28,8 +28,8 @@ jobs:
       - run:
           name: Transform Formula Template
           command: |
-            git config user.email "$GH_EMAIL"
-            git config user.name "$GH_NAME"
+            # git config user.email "$GH_EMAIL"
+            # git config user.name "$GH_NAME"
 
             export WEBHOOK_VERSION=$("<< pipeline.trigger_parameters.webhook.body >>" | jq .version)
 
@@ -43,7 +43,7 @@ jobs:
             git add --all
             git commit -m "Parra CLI version $WEBHOOK_VERSION"
 
-            git push -q git@github.com:Parra-Inc/tap.git main
+            git push git@github.com:Parra-Inc/tap.git main
 
 workflows:
   update-cli-formula-workflow:
