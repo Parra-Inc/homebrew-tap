@@ -37,8 +37,3 @@ jobs:
             echo "woooo! \n"
             cat ./Formula/parra-cli.rb
 
-workflows:
-  update-cli-formula-workflow:
-    when: { equal: [ webhook, << pipeline.trigger_source >> ] }
-    jobs:
-      - update-cli-formula
