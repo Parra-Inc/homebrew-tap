@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Test
           command: |
-            echo "<< pipeline.trigger_parameters.webhook.body >>"
+            echo "<< pipeline.trigger_parameters >>"
       # - run:
       #     name: Transform Formula Template
       #     environment: |
