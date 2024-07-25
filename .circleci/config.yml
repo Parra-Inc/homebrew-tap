@@ -31,7 +31,8 @@ jobs:
 
             git add --all
             git commit -m "Parra CLI version $WEBHOOK_VERSION"
-            git push
+
+            git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
 
 workflows:
   update-cli-formula-workflow:
