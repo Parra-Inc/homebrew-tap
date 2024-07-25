@@ -47,7 +47,9 @@ jobs:
             git commit -m "Parra CLI version $WEBHOOK_VERSION [skip ci]"
 
             # Quiet push so key isn't shown in logs
-            git push -q git@github.com:Parra-Inc/tap.git main
+            # git push -q git@github.com:Parra-Inc/tap.git main
+            git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
+
 
 workflows:
   update-cli-formula-workflow:
