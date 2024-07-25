@@ -32,6 +32,6 @@ jobs:
 # Orchestrate jobs using workflows
 workflows:
   update-cli-formula-workflow:
-    when: << pipeline.trigger_parameters >>
+    when: << trigger_parameters >>
     jobs:
       - update-cli-formula
