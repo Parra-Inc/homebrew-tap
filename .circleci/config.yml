@@ -32,6 +32,6 @@ jobs:
 # Orchestrate jobs using workflows
 workflows:
   update-cli-formula-workflow:
-    when: << trigger_parameters >>
+    when: { equal: [ webhook, << pipeline.trigger_source >> ] }
     jobs:
       - update-cli-formula
