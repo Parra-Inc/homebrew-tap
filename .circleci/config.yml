@@ -25,20 +25,18 @@ jobs:
             export WEBHOOK_X86_SHA=("<< pipeline.trigger_parameters.webhook.body >>" | jq .x86_sha)
             export WEBHOOK_DESCRIPTION=("<< pipeline.trigger_parameters.webhook.body >>" | jq .description)
 
-            echo "Apply requested context to template:\n"
+            echo "Apply requested context to template:"
             echo "<< pipeline.trigger_parameters.webhook.body >>"
 
             liquidjs --template @./Templates/parra-cli.rb.liquid --context '<< pipeline.trigger_parameters.webhook.body >>' --output ./Formula/parra-cli.rb
 
-            echo "woooo! \n"
             cat ./Formula/parra-cli.rb
+
+            git add --all
+            git commit -m "Parra CLI version $WEBHOOK_VERSION"
+            git push
 
 workflows:
   update-cli-formula-workflow:
     jobs:
-      - update-cli-formula:
-          filters:
-            branches:
-              # Don't run for any branch. Just from webhooks.
-              ignore:
-                - /.*/
+      - update-cli-formula
