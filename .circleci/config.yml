@@ -28,9 +28,6 @@ jobs:
       - run:
           name: Transform Formula Template
           command: |
-            # git config user.email "$GH_EMAIL"
-            # git config user.name "$GH_NAME"
-
             export WEBHOOK_VERSION=$("<< pipeline.trigger_parameters.webhook.body >>" | jq .version)
 
             echo "Apply requested context to template:"
@@ -40,10 +37,15 @@ jobs:
 
             cat ./Formula/parra-cli.rb
             
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "$GH_EMAIL"
+            git config user.name "$GH_NAME"
+
             git add --all
             git commit -m "Parra CLI version $WEBHOOK_VERSION"
 
-            git push git@github.com:Parra-Inc/tap.git main
+            # Quiet push so key isn't shown in logs
+            git push -q git@github.com:Parra-Inc/tap.git main
 
 workflows:
   update-cli-formula-workflow:
