@@ -45,5 +45,6 @@ jobs:
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   update-cli-formula-workflow:
+    when: << pipeline.trigger_parameters.webhook >>
     jobs:
       - update-cli-formula
