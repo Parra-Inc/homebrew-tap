@@ -32,23 +32,10 @@ jobs:
           name: Test
           command: |
             echo "<< pipeline.trigger_parameters >>"
-      # - run:
-      #     name: Transform Formula Template
-      #     environment: |
-      #       WEBHOOK_VERSION: << pipeline.trigger_parameters.webhook.body >> | jq .version
-      #       WEBHOOK_ARM_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .arm_sha
-      #       WEBHOOK_X86_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .x86_sha
-      #       WEBHOOK_DESCRIPTION: << pipeline.trigger_parameters.webhook.body >> | jq .description
-      #     command: |
-      #       echo "Apply requested context to template:\n"
-      #       echo "<< pipeline.trigger_parameters.webhook.body >>"
-
-      #       liquidjs --template @./Templates/parra-cli.rb.liquid --context '<< pipeline.trigger_parameters.webhook.body >>' --output ./Formula/parra-cli.rb
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   update-cli-formula-workflow:
-    # when: << pipeline.trigger_parameters.webhook >>
     jobs:
       - update-cli-formula
