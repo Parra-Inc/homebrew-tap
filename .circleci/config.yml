@@ -20,6 +20,9 @@ jobs:
       - run:
           name: Transform Formula Template
           command: |
+            git config user.email "$GH_EMAIL"
+            git config user.name "$GH_NAME"
+
             export WEBHOOK_VERSION=$("<< pipeline.trigger_parameters.webhook.body >>" | jq .version)
 
             echo "Apply requested context to template:"
@@ -28,9 +31,6 @@ jobs:
             liquidjs --template @./Templates/parra-cli.rb.liquid --context '<< pipeline.trigger_parameters.webhook.body >>' --output ./Formula/parra-cli.rb
 
             cat ./Formula/parra-cli.rb
-
-            git config user.email "$GH_EMAIL"
-            git config user.name "$GH_NAME"
             
             git add --all
             git commit -m "Parra CLI version $WEBHOOK_VERSION"
