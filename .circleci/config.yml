@@ -18,17 +18,13 @@ jobs:
           name: Install Liquid
           command: npm install liquidjs -g
       - run:
-          name: Test
-          command: |
-            echo $WEBHOOK_BODY
-      - run:
           name: Transform Formula Template
-          environment:
-            WEBHOOK_VERSION: << pipeline.trigger_parameters.webhook.body >> | jq .version
-            WEBHOOK_ARM_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .arm_sha
-            WEBHOOK_X86_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .x86_sha
-            WEBHOOK_DESCRIPTION: << pipeline.trigger_parameters.webhook.body >> | jq .description
           command: |
+            export WEBHOOK_VERSION=("<< pipeline.trigger_parameters.webhook.body >>" | jq .version)
+            export WEBHOOK_ARM_SHA=("<< pipeline.trigger_parameters.webhook.body >>" | jq .arm_sha)
+            export WEBHOOK_X86_SHA=("<< pipeline.trigger_parameters.webhook.body >>" | jq .x86_sha)
+            export WEBHOOK_DESCRIPTION=("<< pipeline.trigger_parameters.webhook.body >>" | jq .description)
+
             echo "Apply requested context to template:\n"
             echo "<< pipeline.trigger_parameters.webhook.body >>"
 
