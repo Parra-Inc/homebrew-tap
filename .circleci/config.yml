@@ -23,7 +23,7 @@ jobs:
             echo $WEBHOOK_BODY
       - run:
           name: Transform Formula Template
-          environment: |
+          environment:
             WEBHOOK_VERSION: << pipeline.trigger_parameters.webhook.body >> | jq .version
             WEBHOOK_ARM_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .arm_sha
             WEBHOOK_X86_SHA: << pipeline.trigger_parameters.webhook.body >> | jq .x86_sha
