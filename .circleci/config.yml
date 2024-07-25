@@ -34,6 +34,9 @@ jobs:
 
             liquidjs --template @./Templates/parra-cli.rb.liquid --context '<< pipeline.trigger_parameters.webhook.body >>' --output ./Formula/parra-cli.rb
 
+            echo "woooo! \n"
+            cat ./Formula/parra-cli.rb
+
 workflows:
   update-cli-formula-workflow:
     when: { equal: [ webhook, << pipeline.trigger_source >> ] }
