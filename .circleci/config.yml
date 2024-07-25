@@ -37,3 +37,12 @@ jobs:
             echo "woooo! \n"
             cat ./Formula/parra-cli.rb
 
+workflows:
+  update-cli-formula-workflow:
+    jobs:
+      - update-cli-formula:
+          filters:
+            branches:
+              # Don't run for any branch. Just from webhooks.
+              ignore:
+                - /.*/
