@@ -42,7 +42,7 @@ jobs:
             git config user.name "$GH_NAME"
 
             git add --all
-            git commit -m "Parra CLI version $WEBHOOK_VERSION"
+            git commit -m "Parra CLI version $WEBHOOK_VERSION [skip ci]"
 
             # Quiet push so key isn't shown in logs
             git push -q git@github.com:Parra-Inc/tap.git main
