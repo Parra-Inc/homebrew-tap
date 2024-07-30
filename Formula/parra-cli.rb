@@ -7,14 +7,13 @@ class ParraCli < Formula
   desc DESCRIPTION
   homepage "https://parra.io"
   license "MIT"
-  url "https://github.com/Parra-Inc/parra-cli.git", tag: VERSION
-
+  url "https://github.com/Parra-Inc/parra-mobile-sdks.git", tag: VERSION
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v#{VERSION}/parra-cli-#{VERSION}.aarch64_apple_darwin.tar.gz"
+      url "https://github.com/Parra-Inc/parra-mobile-sdks/releases/download/v#{VERSION}/parra-cli-#{VERSION}.aarch64_apple_darwin.tar.gz"
       sha256 ARM_SHA
     elsif Hardware::CPU.intel?
-      url "https://github.com/Parra-Inc/parra-cli/releases/download/v#{VERSION}/parra-cli-#{VERSION}.x86_64_apple_darwin.tar.gz"
+      url "https://github.com/Parra-Inc/parra-mobile-sdks/releases/download/v#{VERSION}/parra-cli-#{VERSION}.x86_64_apple_darwin.tar.gz"
       sha256 X86_SHA
     end
   end
