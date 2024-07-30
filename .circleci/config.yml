@@ -11,6 +11,7 @@ jobs:
   update-cli-formula:
     docker:
       - image: cimg/base:current
+    executor: node/default
 
     steps:
       - checkout
@@ -20,9 +21,6 @@ jobs:
             - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
 
       - jq/install
-
-      - node/install:
-          node-version: '21.4'
 
       - run:
           name: Install Liquid
