@@ -31,7 +31,9 @@ jobs:
       - run: 
           name: Dump Params
           command: |
-            echo "<< pipeline.trigger_parameters >>"
+            echo "<< version >>"
+            echo "<< arm_sha >>"
+            echo "<< x86_sha >>"
 
       # - when:
       #     condition:
