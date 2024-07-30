@@ -28,6 +28,10 @@ jobs:
           fingerprints:
             - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
             - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
+      - run: 
+          name: Dump Params
+          command: |
+            echo "<< pipeline >>"
 
       # - when:
       #     condition:
@@ -72,7 +76,7 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    # when: << pipeline.parameters.version >>
+    when: << pipeline.parameters.version >>
     jobs:
       - update-cli-formula:
           filters:
