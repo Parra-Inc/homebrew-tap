@@ -4,11 +4,6 @@ orbs:
   jq: circleci/jq@3.0.0
   slack: circleci/slack@4.13.3
 
-parameters:
-  body:
-    type: string
-    default: ""
-
 jobs:
   # Invoked by incoming webhook by SDKs repo. It is expected that new SDK versions have been created and
   # this script handles updating the Homebrew Formula and pushing it back to the tap repo.
@@ -31,10 +26,7 @@ jobs:
                 fingerprints:
                   - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
                   - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
-            - run: 
-                name: Dump Params
-                command: |
-                  echo "$PIPELINE_PARAMS"
+
             - jq/install
 
             - run:
@@ -49,7 +41,7 @@ jobs:
                   echo "Apply requested context to template:"
                   echo $REQUEST_BODY
 
-                  liquidjs --template @./Templates/parra-cli.rb.liquid --context $REQUEST_BODY --output ./Formula/parra-cli.rb
+                  liquidjs --template @./Templates/parra-cli.rb.liquid --context "$REQUEST_BODY" --output ./Formula/parra-cli.rb
 
                   cat ./Formula/parra-cli.rb
                   
@@ -71,8 +63,8 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    # when: 
-      # condition: << pipeline.trigger_parameters >> 
+    when: 
+      condition: << pipeline.body >> 
     jobs:
       - update-cli-formula:
           body: << pipeline.trigger_parameters.webhook.body >>
