@@ -31,7 +31,7 @@ jobs:
       - run: 
           name: Dump Params
           command: |
-            echo "<< pipeline.parameters >>"
+            echo "<< pipeline.trigger_parameters >>"
 
       # - when:
       #     condition:
