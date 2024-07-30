@@ -21,6 +21,8 @@ jobs:
   update-cli-formula:
     docker:
       - image: cimg/node:lts
+    environment:
+      PIPELINE_PARAMS: << pipeline >>
 
     steps:
       - checkout
@@ -31,9 +33,7 @@ jobs:
       - run: 
           name: Dump Params
           command: |
-            echo "<< version >>"
-            echo "<< arm_sha >>"
-            echo "<< x86_sha >>"
+            echo "$PIPELINE_PARAMS"
 
       # - when:
       #     condition:
