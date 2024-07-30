@@ -45,7 +45,7 @@ jobs:
             git config --global user.email "$GH_EMAIL"
 
             git add --all
-            git commit --allow-empty -m "Parra CLI version $WEBHOOK_VERSION [skip ci]"
+            git commit --allow-empty -m "Parra CLI version $WEBHOOK_VERSION"
 
             # Quiet push so key isn't shown in logs
             # git push -q git@github.com:Parra-Inc/tap.git main
