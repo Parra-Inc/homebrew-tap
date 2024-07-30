@@ -63,8 +63,8 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    when: 
-      condition: << pipeline >> 
+    # when: 
+    #   condition: << pipeline >> 
     jobs:
       - update-cli-formula:
           body: << pipeline.trigger_parameters.webhook.body >>
