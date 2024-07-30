@@ -75,7 +75,7 @@ workflows:
       # condition: << pipeline.trigger_parameters >> 
     jobs:
       - update-cli-formula:
-          body: echo << pipeline.trigger_parameters.webhook.body >>
+          body: << pipeline.trigger_parameters.webhook.body >>
           filters:
             branches:
               only:
