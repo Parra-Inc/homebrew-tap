@@ -4,6 +4,17 @@ orbs:
   jq: circleci/jq@3.0.0
   slack: circleci/slack@4.13.3
 
+parameters:
+  version:
+    type: string
+    default: ""
+  arm_sha:
+    type: string
+    default: ""
+  x86_sha:
+    type: string
+    default: ""
+
 jobs:
   # Invoked by incoming webhook by SDKs repo. It is expected that new SDK versions have been created and
   # this script handles updating the Homebrew Formula and pushing it back to the tap repo.
@@ -18,49 +29,50 @@ jobs:
             - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
             - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
 
-      - when:
-          condition:
-            and:
-              - << pipeline >>
-              - << pipeline.trigger_parameters >>
-          steps:
-            - jq/install
+      # - when:
+      #     condition:
+      #       and:
+      #         - << pipeline >>
+      #         - << pipeline.trigger_parameters >>
+      #     steps:
+      - jq/install
 
-            - run:
-                name: Install Liquid
-                command: sudo npm install liquidjs -g
+      - run:
+          name: Install Liquid
+          command: sudo npm install liquidjs -g
 
-            - run:
-                name: Transform Formula Template
-                command: |
-                  export REQUEST_BODY="<< pipeline.trigger_parameters.webhook.body >>"
-                  export WEBHOOK_VERSION=$($REQUEST_BODY | jq .version)
+      - run:
+          name: Transform Formula Template
+          command: |
+            export REQUEST_BODY="<< pipeline.trigger_parameters.webhook.body >>"
+            export WEBHOOK_VERSION=$($REQUEST_BODY | jq .version)
 
-                  echo "Apply requested context to template:"
-                  echo $REQUEST_BODY
+            echo "Apply requested context to template:"
+            echo $REQUEST_BODY
 
-                  liquidjs --template @./Templates/parra-cli.rb.liquid --context $REQUEST_BODY --output ./Formula/parra-cli.rb
+            liquidjs --template @./Templates/parra-cli.rb.liquid --context $REQUEST_BODY --output ./Formula/parra-cli.rb
 
-                  cat ./Formula/parra-cli.rb
-                  
-                  git config credential.helper 'cache --timeout=120'
-                  git config --global user.name "$GH_USER"
-                  git config --global user.email "$GH_EMAIL"
+            cat ./Formula/parra-cli.rb
+            
+            git config credential.helper 'cache --timeout=120'
+            git config --global user.name "$GH_USER"
+            git config --global user.email "$GH_EMAIL"
 
-                  git add --all
-                  git commit --allow-empty -m "Parra CLI version $WEBHOOK_VERSION"
+            git add --all
+            git commit --allow-empty -m "Parra CLI version $WEBHOOK_VERSION"
 
-                  # Quiet push so key isn't shown in logs
-                  # git push -q git@github.com:Parra-Inc/tap.git main
-                  git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
+            # Quiet push so key isn't shown in logs
+            # git push -q git@github.com:Parra-Inc/tap.git main
+            git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
 
-            - slack/notify:
-                channel: C06NY501UAX
-                event: fail
-                template: basic_fail_1
+      - slack/notify:
+          channel: C06NY501UAX
+          event: fail
+          template: basic_fail_1
 
 workflows:
   update-cli-formula-workflow:
+    when: << pipeline.parameters >>
     jobs:
       - update-cli-formula:
           filters:
