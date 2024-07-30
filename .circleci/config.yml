@@ -58,4 +58,5 @@ workflows:
       - update-cli-formula:
           filters:
             branches:
-              ignore: /.*/  # This will ignore all branches
+              only:
+                - main # Webhook trigger happens on main for some reason.
