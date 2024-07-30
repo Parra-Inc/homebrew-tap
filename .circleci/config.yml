@@ -22,17 +22,18 @@ jobs:
 
       - run:
           name: Install Liquid
-          command: npm install liquidjs -g
+          command: sudo npm install liquidjs -g
 
       - run:
           name: Transform Formula Template
           command: |
-            export WEBHOOK_VERSION=$("<< pipeline.trigger_parameters.webhook.body >>" | jq .version)
+            export REQUEST_BODY="<< pipeline.trigger_parameters.webhook.body >>"
+            export WEBHOOK_VERSION=$($REQUEST_BODY | jq .version)
 
             echo "Apply requested context to template:"
-            echo "<< pipeline.trigger_parameters.webhook.body >>"
+            echo $REQUEST_BODY
 
-            liquidjs --template @./Templates/parra-cli.rb.liquid --context '<< pipeline.trigger_parameters.webhook.body >>' --output ./Formula/parra-cli.rb
+            liquidjs --template @./Templates/parra-cli.rb.liquid --context $REQUEST_BODY --output ./Formula/parra-cli.rb
 
             cat ./Formula/parra-cli.rb
             
@@ -54,6 +55,7 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
+    when: << pipeline.trigger_parameters >>
     jobs:
       - update-cli-formula:
           filters:
