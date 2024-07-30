@@ -22,7 +22,7 @@ jobs:
     docker:
       - image: cimg/node:lts
     environment:
-      PIPELINE_PARAMS: << pipeline >>
+      PIPELINE_PARAMS: << parameters >>
 
     steps:
       - checkout
