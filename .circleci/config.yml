@@ -5,24 +5,28 @@ orbs:
   slack: circleci/slack@4.13.3
 
 parameters:
-  version:
+  body:
     type: string
     default: ""
-  arm_sha:
-    type: string
-    default: ""
-  x86_sha:
-    type: string
-    default: ""
+  # arm_sha:
+  #   type: string
+  #   default: ""
+  # x86_sha:
+  #   type: string
+  #   default: ""
 
 jobs:
   # Invoked by incoming webhook by SDKs repo. It is expected that new SDK versions have been created and
   # this script handles updating the Homebrew Formula and pushing it back to the tap repo.
   update-cli-formula:
+    parameters:
+      body:
+        type: string
+        default: ""
     docker:
       - image: cimg/node:lts
     environment:
-      PIPELINE_PARAMS: << parameters >>
+      REQUEST_BODY: << body >>
 
     steps:
       - checkout
@@ -50,7 +54,6 @@ jobs:
       - run:
           name: Transform Formula Template
           command: |
-            export REQUEST_BODY="<< pipeline.trigger_parameters.webhook.body >>"
             export WEBHOOK_VERSION=$($REQUEST_BODY | jq .version)
 
             echo "Apply requested context to template:"
@@ -81,6 +84,7 @@ workflows:
     # when: << pipeline.parameters.version >>
     jobs:
       - update-cli-formula:
+          body: echo << pipeline.trigger_parameters.webhook.body >>
           filters:
             branches:
               only:
