@@ -19,7 +19,10 @@ jobs:
             - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
 
       - when:
-          condition: << pipeline.trigger_parameters >>
+          condition:
+            and:
+              - << pipeline >>
+              - << pipeline.trigger_parameters >>
           steps:
             - jq/install
 
