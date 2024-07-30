@@ -23,15 +23,14 @@ jobs:
       REQUEST_BODY: << parameters.body >>
 
     steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
-            - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
-
       - when:
           condition: << parameters.body >>
           steps:
+            - checkout
+            - add_ssh_keys:
+                fingerprints:
+                  - "SHA256:QZzH4mh9xO+ArIdKO+hiIYq54i5itfQN2PdZlvV+yok"
+                  - "SHA256:YqMJCA/aAJSLDZXC4ZJ0bhSIQfHo1dNtSYOj/pXBdrI"
             - run: 
                 name: Dump Params
                 command: |
@@ -72,10 +71,10 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    # when: << pipeline.trigger_parameters >> 
+    when: << pipeline.trigger_parameters >> 
     jobs:
       - update-cli-formula:
-          # body: echo << pipeline.trigger_parameters.webhook.body >>
+          body: echo << pipeline.trigger_parameters.webhook.body >>
           filters:
             branches:
               only:
