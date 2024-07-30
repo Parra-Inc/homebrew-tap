@@ -72,7 +72,7 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    when: << pipeline.parameters >>
+    when: << parameters >>
     jobs:
       - update-cli-formula:
           filters:
