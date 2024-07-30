@@ -55,4 +55,7 @@ jobs:
 workflows:
   update-cli-formula-workflow:
     jobs:
-      - update-cli-formula
+      - update-cli-formula:
+          filters:
+            branches:
+              ignore: /.*/  # This will ignore all branches
