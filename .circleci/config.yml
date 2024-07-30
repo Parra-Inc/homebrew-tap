@@ -76,7 +76,7 @@ jobs:
 
 workflows:
   update-cli-formula-workflow:
-    when: << pipeline.parameters.version >>
+    # when: << pipeline.parameters.version >>
     jobs:
       - update-cli-formula:
           filters:
