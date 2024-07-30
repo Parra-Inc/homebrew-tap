@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   jq: circleci/jq@3.0.0
-  node: circleci/node@5.2.0
   slack: circleci/slack@4.13.3
 
 jobs:
@@ -10,8 +9,7 @@ jobs:
   # this script handles updating the Homebrew Formula and pushing it back to the tap repo.
   update-cli-formula:
     docker:
-      - image: cimg/base:current
-    executor: node/default
+      - image: cimg/node:lts
 
     steps:
       - checkout
