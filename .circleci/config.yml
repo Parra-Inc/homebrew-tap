@@ -36,7 +36,7 @@ jobs:
             - run:
                 name: Transform Formula Template
                 command: |
-                  export WEBHOOK_VERSION=$($REQUEST_BODY | jq .version)
+                  export WEBHOOK_VERSION=$(echo $REQUEST_BODY | jq .version)
 
                   echo "Apply requested context to template:"
                   echo $REQUEST_BODY
@@ -51,10 +51,11 @@ jobs:
 
                   git add --all
                   git commit --allow-empty -m "Parra CLI version $WEBHOOK_VERSION"
+                  git tag $WEBHOOK_VERSION
 
                   # Quiet push so key isn't shown in logs
                   # git push -q git@github.com:Parra-Inc/tap.git main
-                  git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main
+                  git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/tap.git main --tags
 
             - slack/notify:
                 channel: C06NY501UAX
