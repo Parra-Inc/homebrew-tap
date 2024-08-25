@@ -36,7 +36,7 @@ jobs:
             - run:
                 name: Transform Formula Template
                 command: |
-                  if [ -n "${REQUEST_BODY}" ]; then
+                  if [ -z "${REQUEST_BODY}" ]; then
                     export WEBHOOK_VERSION=$(echo $REQUEST_BODY | jq .version)
 
                     echo "Apply requested context to template:"
