@@ -57,6 +57,7 @@ jobs:
                     # Quiet push so key isn't shown in logs
                     git push -q https://${TAPS_REPO_ACCESS_TOKEN}@github.com/Parra-Inc/homebrew-tap.git main --tags
                   else
+                    echo "Wasn't triggered from webhook. Skipping."
                     circleci-agent step halt
                   fi
 
