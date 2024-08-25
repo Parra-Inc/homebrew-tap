@@ -39,7 +39,7 @@ jobs:
                   echo "Apply requested context to template:"
                   echo $REQUEST_BODY
 
-                  if [ -n "$REQUEST_BODY" ]; then
+                  if [[ -n "$REQUEST_BODY" && "$REQUEST_BODY" != "{}" ]]; then
                     export WEBHOOK_VERSION=$(echo $REQUEST_BODY | jq .version)
 
 
