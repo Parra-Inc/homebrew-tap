@@ -36,11 +36,12 @@ jobs:
             - run:
                 name: Transform Formula Template
                 command: |
-                  if [ -z "${REQUEST_BODY}" ]; then
+                  echo "Apply requested context to template:"
+                  echo $REQUEST_BODY
+
+                  if [ -n "$REQUEST_BODY" ]; then
                     export WEBHOOK_VERSION=$(echo $REQUEST_BODY | jq .version)
 
-                    echo "Apply requested context to template:"
-                    echo $REQUEST_BODY
 
                     liquidjs --template @./Templates/parra-cli.rb.liquid --context "$REQUEST_BODY" --output ./Formula/parra-cli.rb
 
