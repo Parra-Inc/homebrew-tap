@@ -1,6 +1,6 @@
-VERSION = "0.32.5"
-ARM_SHA = "4cca80b85d273d51d9666dece304d5d0070586f20666c0252cb8f5161ac94ecc"
-X86_SHA = "e29225780ce4b943610cdf0ad69dcb9a5da97d5dab7735a0871cae5cd1efae70"
+VERSION = "0.33.1"
+ARM_SHA = "4ed1966b01048395bf720ed661cf0ae3895a43838090c3bd5ab930665ffbaa0b"
+X86_SHA = "6f941b1028e35fc9c14c16195a84b8728810d34a9ae31c97e72631966c190e78"
 DESCRIPTION = "A utility for getting started with your next Parra.io project."
 
 class ParraCli < Formula
